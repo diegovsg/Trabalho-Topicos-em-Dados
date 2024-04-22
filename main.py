@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import re
 
 
 def scrape_dengue_data():
@@ -11,11 +12,17 @@ def scrape_dengue_data():
         # Encontre todos os links dentro do elemento com a classe "publish"
         links = soup.select('.publish a[href]')
         
-        # Iterar sobre os links e imprimir seus URLs
+        # # Iterar sobre os links e imprimir seus URLs
+        # for link in links:
+        #     #print("Salvando na lista:", link['href'])
+        #     lista_links = link['href']
+        # Itera sobre os links e verifica se contêm "2024" no atributo href
         for link in links:
-            print("Salvando na lista:", link['href'])
-            lista_links = link['href']
+            href = link.get('href')
+            if href and re.search(r'/2024/', href):
+                lista_links.append(href)
 
+    print(lista_links)
     return lista_links
 
 
@@ -42,4 +49,5 @@ def scrapeTabela(links_encontrados):
 
 if __name__ == "__main__":
     links_encontrados = scrape_dengue_data()
-    scrapeTabela(links_encontrados)
+    scrape_dengue_data()
+    #scrapeTabela(links_encontrados)
