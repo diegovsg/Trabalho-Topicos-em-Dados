@@ -15,20 +15,16 @@ def scrape_dengue_data():
         # Encontre todos os links dentro do elemento com a classe "publish"
         links = soup.select('.publish a[href]')
         
-        # # Iterar sobre os links e imprimir seus URLs
-        # for link in links:
-        #     #print("Salvando na lista:", link['href'])
-        #     lista_links = link['href']
-        # Itera sobre os links e verifica se contêm "2024" no atributo href
+        # Itera sobre os links e verifica se contêm "2022", "2023" ou "2024" no atributo href
         for link in links:
             href = link.get('href')
-            if href and re.search(r'/2024/', href):
+            if href and re.search(r'/(2022|2023|2024)/', href):
                 lista_links.append(href)
 
     print(lista_links)
     return lista_links
 
-def download(links_2024):
+def download(links):
     # URL base do site
     base_url = "https://saude.sp.gov.br"
 
@@ -36,7 +32,7 @@ def download(links_2024):
     if not os.path.exists('downloads'):
         os.makedirs('downloads')
 
-    for link in links_2024:
+    for link in links:
         full_url = urljoin(base_url, link)  # Concatenar o link extraído com o URL base
         filename = link.split('/')[-1]  # Extrair o nome do arquivo do URL
         filepath = os.path.join('downloads', filename)  # Caminho completo para salvar o arquivo
@@ -49,30 +45,16 @@ def download(links_2024):
                 print(f"Arquivo '{filename}' baixado com sucesso.")
         else:
             print(f"Falha ao baixar o arquivo '{filename}'.")
-        
 
-# def scrapeTabela(links_encontrados):
-#     #falta saber que é de 2024 !!
-#     for links in links_encontrados:
-#         print(links)
-#         url_2024 = links
+# Obter os links de todos os anos
+links = scrape_dengue_data()
 
-#     # Fazer uma solicitação HTTP para o URL
-#     link_response = requests.get(url_2024)
-            
-#     # Verificar se a solicitação foi bem-sucedida
-#     if link_response.status_code == 200:
-#         soup = BeautifulSoup(link_response.content, 'html.parser')
-#         link_url = soup.select('.publish a[href]')
-#         print("Conteúdo da página acessada")
-#         scrapeTabela(link_response)
-#     else:
-#         print("Falha ao acessar:", link_url)
-   
-#     print(soup)
-    
+# Baixar os arquivos
+download(links)
 
 if __name__ == "__main__":
+    # Obter os links de todos os anos
     links_encontrados = scrape_dengue_data()
-    download(links_encontrados)
 
+    # Baixar os arquivos
+    download(links_encontrados)
