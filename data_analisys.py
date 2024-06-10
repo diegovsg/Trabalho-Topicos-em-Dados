@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from tabulate import tabulate
 import seaborn as sns
 
+
 def modificar_coluna_tabela(file_path):
     # Carregar o arquivo CSV
     dengue_data = pd.read_csv(file_path)
