@@ -1,8 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
 from tabulate import tabulate
-
+import seaborn as sns
 
 def modificar_coluna_tabela(file_path):
     # Carregar o arquivo CSV
