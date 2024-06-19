@@ -5,7 +5,6 @@ import os
 from urllib.parse import urljoin
 
 
-
 def scrape_dengue_data():
     url = "https://saude.sp.gov.br/cve-centro-de-vigilancia-epidemiologica-prof.-alexandre-vranjac/oldzoonoses/dengue/dados-estatisticos"
     response = requests.get(url)
