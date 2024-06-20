@@ -1,0 +1,1 @@
+Trabalho para Disciplina de Topicos em Dados, onde eu faço um webscrapping de arquivos csv de casos de dengue em sao paulo e depois verifico os casos notificados e confirmados e comparo ao longo dos anos.
