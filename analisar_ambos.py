@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from tabulate import tabulate
 import seaborn as sns
 
+
 # Função para modificar a tabela
 def modificar_coluna_tabela(file_path):
     dengue_data = pd.read_csv(file_path)
@@ -50,28 +51,28 @@ def criar_graficos(analise_result):
     plt.grid(True)
     plt.show()
 
-# Caminhos para os arquivos de 2024 e 2022
-file_path_2024 = r'C:\Users\Diego\Documents\GitHub\Trabalho-Topicos-em-Dados\downloads\dengue24_mes.csv'
-new_file_path_2024 = r'C:\Users\Diego\Documents\GitHub\Trabalho-Topicos-em-Dados\downloads\dengue24_mes_atualizado.csv'
-file_path_2022 = r'C:\Users\Diego\Documents\GitHub\Trabalho-Topicos-em-Dados\downloads\dengue22_mes.csv'
-new_file_path_2022 = r'C:\Users\Diego\Documents\GitHub\Trabalho-Topicos-em-Dados\downloads\dengue22_mes_atualizado.csv'
+# Caminhos para os arquivos de 2024 e 2023
+file_path_2024 = r'C:\Users\Diego\Documents\GitHub\Trabalho-Topicos-em-Dados\downloads\dengue23_mes.csv'
+new_file_path_2024 = r'C:\Users\Diego\Documents\GitHub\Trabalho-Topicos-em-Dados\downloads\dengue23_mes_atualizado.csv'
+file_path_2023 = r'C:\Users\Diego\Documents\GitHub\Trabalho-Topicos-em-Dados\downloads\dengue22_mes.csv'
+new_file_path_2023 = r'C:\Users\Diego\Documents\GitHub\Trabalho-Topicos-em-Dados\downloads\dengue22_mes_atualizado.csv'
 
 # Processar e analisar dados de 2024
 criarArquivoAtualizado(file_path_2024, new_file_path_2024)
 analise_result_2024 = analisar_dados_dengue(new_file_path_2024)
 
-# Processar e analisar dados de 2022
-criarArquivoAtualizado(file_path_2022, new_file_path_2022)
-analise_result_2022 = analisar_dados_dengue(new_file_path_2022)
+# Processar e analisar dados de 2023
+criarArquivoAtualizado(file_path_2023, new_file_path_2023)
+analise_result_2023 = analisar_dados_dengue(new_file_path_2023)
 
-# Comparar os dados de 2024 com 2022
-combined_data = pd.concat([analise_result_2024, analise_result_2022], keys=['2024', '2022'], names=['Ano', 'Mes'])
+# Comparar os dados de 2024 com 2023
+combined_data = pd.concat([analise_result_2024, analise_result_2023], keys=['2022', '2023'], names=['Ano', 'Mes'])
 
 # Criar gráficos comparativos
 def criar_graficos_comparativos(combined_data):
     plt.figure(figsize=(14, 8))
     sns.lineplot(data=combined_data.reset_index(), x='Mes', y='Confirmados', hue='Ano', style='Ano', markers=True, dashes=False)
-    plt.title('Casos Confirmados por Mês (2022 vs 2024)')
+    plt.title('Casos Confirmados por Mês (2023 vs 2022)')
     plt.xlabel('Meses')
     plt.ylabel('Número de Casos Confirmados')
     plt.grid(True)
@@ -79,7 +80,7 @@ def criar_graficos_comparativos(combined_data):
     
     plt.figure(figsize=(14, 8))
     sns.lineplot(data=combined_data.reset_index(), x='Mes', y='Notificados', hue='Ano', style='Ano', markers=True, dashes=False)
-    plt.title('Casos Notificados por Mês (2022 vs 2024)')
+    plt.title('Casos Notificados por Mês (2023 vs 2022)')
     plt.xlabel('Meses')
     plt.ylabel('Número de Casos Notificados')
     plt.grid(True)
